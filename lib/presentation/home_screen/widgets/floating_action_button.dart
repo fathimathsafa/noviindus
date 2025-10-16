@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+import 'package:noviindus/core/constant/color_constants.dart';
+import 'package:noviindus/core/constant/size_constants.dart';
+
+class AddFab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final double size = SizeConstants.height(7.5);
+    return SizedBox(
+      height: size,
+      width: size,
+      child: FloatingActionButton(
+        backgroundColor: ColorConstants.primary,
+        shape: const CircleBorder(),
+        onPressed: () {},
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
+    );
+  }
+}
