@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noviindus/core/constant/color_constants.dart';
+import 'package:noviindus/presentation/add_video_screen/view/add_video_screen.dart';
 import 'package:noviindus/presentation/home_screen/view/home_screen.dart';
 import 'package:noviindus/presentation/login_screen/view/login_screen.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: ColorConstants.background,
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const AddVideoScreen(),
     );
   }
 }
