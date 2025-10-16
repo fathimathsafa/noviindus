@@ -5,6 +5,7 @@ import 'package:noviindus/core/constant/text_style_constants.dart';
 import 'package:noviindus/presentation/login_screen/widgets/continue_button.dart';
 import 'package:noviindus/presentation/login_screen/widgets/country_code_filed.dart';
 import 'package:noviindus/presentation/login_screen/widgets/phone_field.dart';
+import 'package:noviindus/presentation/login_screen/controller/login_screen_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -13,10 +14,13 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConstants.init(context);
 
+    final controller = LoginScreenController();
     return Scaffold(
       backgroundColor: ColorConstants.background,
       body: SafeArea(
-        child: LayoutBuilder(
+        child: LoginScreenControllerProvider(
+          controller: controller,
+          child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
               padding: EdgeInsets.symmetric(
@@ -64,6 +68,7 @@ class LoginScreen extends StatelessWidget {
               ),
             );
           },
+        ),
         ),
       ),
     );

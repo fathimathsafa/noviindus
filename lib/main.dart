@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: ColorConstants.background,
         useMaterial3: true,
       ),
-      home: const AddVideoScreen(),
+      home: const LoginScreen(),
     );
   }
 }

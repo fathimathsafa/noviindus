@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:noviindus/core/constant/color_constants.dart';
 import 'package:noviindus/core/constant/size_constants.dart';
 import 'package:noviindus/core/constant/text_style_constants.dart';
+import 'package:noviindus/presentation/login_screen/controller/login_screen_controller.dart';
 
 class PhoneField extends StatelessWidget {
   @override
@@ -22,6 +23,7 @@ class PhoneField extends StatelessWidget {
         expands: true,
         minLines: null,
         maxLines: null,
+        controller: LoginScreenControllerProvider.of(context).phoneController,
         style: TextStyleConstants.input(context),
         decoration: InputDecoration(
           hintText: 'Enter Mobile Number',
