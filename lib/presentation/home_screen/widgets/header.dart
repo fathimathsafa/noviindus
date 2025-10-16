@@ -24,7 +24,7 @@ class Header extends StatelessWidget {
           backgroundColor: ColorConstants.surface,
           child: CircleAvatar(
             radius: SizeConstants.width(5),
-            backgroundImage: const AssetImage('assets/user_placeholder.png'),
+            backgroundImage: const AssetImage('assets/profile.jpg'),
             onBackgroundImageError: (_, __) {},
           ),
         ),
