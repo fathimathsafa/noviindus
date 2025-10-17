@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:noviindus/core/constant/color_constants.dart';
 import 'package:noviindus/core/constant/size_constants.dart';
 import 'package:noviindus/core/constant/text_style_constants.dart';
-import 'package:noviindus/presentation/login_screen/controller/login_screen_controller.dart';
+import 'package:noviindus/presentation/login_screen/provider/auth_provider.dart';
 
 class ContinueButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double height = SizeConstants.height(6.5);
     final double radius = height / 2;
-    final controller = LoginScreenControllerProvider.of(context);
+        final controller = Provider.of<AuthProvider>(context);
     return GestureDetector(
-      onTap: controller.isLoading ? null : () => controller.onContinue(context),
+      onTap: controller.isLoading ? null : () => controller.login(context),
       child: Container(
       decoration: BoxDecoration(
         color: ColorConstants.surface,

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:noviindus/core/constant/color_constants.dart';
 import 'package:noviindus/core/constant/size_constants.dart';
 import 'package:noviindus/core/constant/text_style_constants.dart';
-import 'package:noviindus/presentation/home_screen/controller/home_controller.dart';
+import 'package:provider/provider.dart';
+import 'package:noviindus/presentation/home_screen/provider/home_provider.dart';
 import 'package:video_player/video_player.dart';
 
 class PostCard extends StatelessWidget {
@@ -12,9 +13,15 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = HomeControllerProvider.of(context);
-    final item = controller.home?.results?[index];
-    final bool isPlaying = controller.playingIndex == index && controller.videoController?.value.isInitialized == true;
+    final controller = Provider.of<HomeProvider>(context);
+    final item = (index >= 0 && index < controller.homeFeed.length) ? controller.homeFeed[index] : null;
+    final bool isPlaying = controller.playingIndex == index && 
+                           controller.videoPlayerController?.value.isInitialized == true;
+    
+    // Safety check - if no item, return empty container
+    if (item == null) {
+      return const SizedBox.shrink();
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +38,7 @@ class PostCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(item?.user?.name ?? 'User', style: TextStyleConstants.input(context)),
+                  Text(item.user?.name ?? 'User', style: TextStyleConstants.input(context)),
                   SizedBox(height: SizeConstants.height(0.5)),
                   Text('5 days ago', style: TextStyleConstants.bodyM(context)),
                 ],
@@ -41,21 +48,25 @@ class PostCard extends StatelessWidget {
         ),
         SizedBox(height: SizeConstants.height(2)),
         AspectRatio(
-          aspectRatio: isPlaying && controller.videoController!.value.isInitialized
-              ? controller.videoController!.value.aspectRatio
+          aspectRatio: isPlaying && controller.videoPlayerController?.value.isInitialized == true
+              ? controller.videoPlayerController!.value.aspectRatio
               : 3 / 4,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(SizeConstants.width(3)),
-            child: isPlaying
-                ? _VideoPlayer(controller: controller.videoController!)
+            child: isPlaying && controller.videoPlayerController != null
+                ? _VideoPlayer(controller: controller.videoPlayerController!)
                 : _ThumbnailOverlay(
-                    imageUrl: item?.image,
-                    onPlay: () => controller.playAt(index),
+                    imageUrl: item.image,
+                    onPlay: () {
+                      if (item.video != null && item.video!.isNotEmpty) {
+                        controller.playAt(index, item.video!);
+                      }
+                    },
                   ),
           ),
         ),
         SizedBox(height: SizeConstants.height(2)),
-        Text(item?.description ?? '', style: TextStyleConstants.bodyM(context).copyWith(color: ColorConstants.textPrimary)),
+        Text(item.description ?? '', style: TextStyleConstants.bodyM(context).copyWith(color: ColorConstants.textPrimary)),
       ],
     );
   }

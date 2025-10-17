@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:noviindus/core/config/app_config.dart';
 import 'package:noviindus/data/model/category_list_model.dart';
 import 'package:noviindus/data/model/home_model.dart';
 
@@ -7,7 +8,7 @@ class HomeService {
   HomeService({this.baseUrl = 'https://frijo.noviindus.in'});
 
   Future<CategoryModel> fetchCategories() async {
-    final uri = Uri.parse('$baseUrl/api/category_list');
+    final uri = Uri.parse('$baseUrl${AppConfig.categoryListEndpoint}');
     final res = await http.get(uri);
     if (res.statusCode >= 200 && res.statusCode < 300) {
       return categoryModelFromJson(res.body);
@@ -24,5 +25,4 @@ class HomeService {
     throw Exception('Failed to load home (${res.statusCode})');
   }
 }
-
 

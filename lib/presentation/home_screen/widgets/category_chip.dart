@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:noviindus/core/constant/color_constants.dart';
 import 'package:noviindus/core/constant/size_constants.dart';
 import 'package:noviindus/core/constant/text_style_constants.dart';
-import 'package:noviindus/presentation/home_screen/controller/home_controller.dart';
+import 'package:noviindus/presentation/home_screen/provider/home_provider.dart';
 
 class CategoryChips extends StatefulWidget {
   @override
@@ -15,15 +16,23 @@ class _CategoryChipsState extends State<CategoryChips> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    print('🏷️ CategoryChips: didChangeDependencies called');
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      HomeControllerProvider.of(context).loadCategories();
+      if (mounted) {
+        print('🏷️ CategoryChips: Calling loadCategories()...');
+        Provider.of<HomeProvider>(context, listen: false).loadCategories();
+      } else {
+        print('🏷️ CategoryChips: Widget not mounted, skipping loadCategories()');
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = HomeControllerProvider.of(context);
+    final controller = Provider.of<HomeProvider>(context);
     final double chipRadius = SizeConstants.width(6);
+    
+    print('🏷️ CategoryChips: Building with categories: ${controller.categories.length}, isLoading: ${controller.isLoadingCategories}, error: ${controller.categoryErrorMessage}');
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -56,7 +65,7 @@ class _CategoryChipsState extends State<CategoryChips> {
                 ),
               ),
             ),
-          if (controller.isLoading)
+          if (controller.isLoadingCategories)
             const SizedBox(height: 24, width: 24, child: CircularProgressIndicator(strokeWidth: 2)),
         ],
       ),

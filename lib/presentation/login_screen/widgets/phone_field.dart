@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:noviindus/core/constant/color_constants.dart';
 import 'package:noviindus/core/constant/size_constants.dart';
 import 'package:noviindus/core/constant/text_style_constants.dart';
-import 'package:noviindus/presentation/login_screen/controller/login_screen_controller.dart';
+import 'package:noviindus/presentation/login_screen/provider/auth_provider.dart';
 
 class PhoneField extends StatelessWidget {
   @override
@@ -23,8 +25,12 @@ class PhoneField extends StatelessWidget {
         expands: true,
         minLines: null,
         maxLines: null,
-        controller: LoginScreenControllerProvider.of(context).phoneController,
+        controller: Provider.of<AuthProvider>(context).phoneController,
         style: TextStyleConstants.input(context),
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(10),
+        ],
         decoration: InputDecoration(
           hintText: 'Enter Mobile Number',
           hintStyle: TextStyleConstants.input(context).copyWith(

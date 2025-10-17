@@ -4,10 +4,11 @@ import 'package:noviindus/core/constant/text_style_constants.dart';
 import 'package:noviindus/core/constant/color_constants.dart';
 
 class DescriptionSection extends StatelessWidget {
-  const DescriptionSection({super.key, required this.title, required this.hint});
+  const DescriptionSection({super.key, required this.title, required this.hint, this.textController});
 
   final String title;
   final String hint;
+  final TextEditingController? textController;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class DescriptionSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(radius),
           ),
           child: TextField(
+            controller: textController,
             maxLines: 6,
             minLines: 4,
             style: TextStyleConstants.bodyM(context).copyWith(color: ColorConstants.textPrimary),

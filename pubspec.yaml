@@ -35,6 +35,7 @@ dependencies:
   shared_preferences: ^2.2.3
   video_player: ^2.9.2
   chewie: ^1.8.1
+  provider: ^6.1.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -51,6 +52,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -66,6 +68,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
       - assets/
+flutter_icons:
+  android: true
+  ios: true
+  image_path: assets/noviindus.jpeg
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: assets/noviindus.jpeg
+  remove_alpha_ios: true
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

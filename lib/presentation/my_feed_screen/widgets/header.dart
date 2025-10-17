@@ -12,7 +12,12 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
+        InkWell(
+          onTap: () {
+            Navigator.pop(context);
+
+          },
+          child: Container(
           height: SizeConstants.height(4.2),
           width: SizeConstants.height(4.2),
           decoration: BoxDecoration(
@@ -21,6 +26,9 @@ class Header extends StatelessWidget {
           ),
           child: const Icon(Icons.arrow_back_ios_new_rounded, size: 16, color: Colors.white),
         ),
+
+        ),
+       
         SizedBox(width: SizeConstants.width(3)),
         Text(title, style: TextStyleConstants.headingXL(context)),
       ],

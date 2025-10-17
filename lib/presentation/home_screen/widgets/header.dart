@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:noviindus/core/constant/color_constants.dart';
 import 'package:noviindus/core/constant/size_constants.dart';
 import 'package:noviindus/core/constant/text_style_constants.dart';
+import 'package:noviindus/presentation/my_feed_screen/view/my_feed_screen.dart';
 
 class Header extends StatelessWidget {
   @override
@@ -19,7 +20,11 @@ class Header extends StatelessWidget {
             ],
           ),
         ),
-        CircleAvatar(
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MyFeedScreen()));
+          },
+          child: CircleAvatar(
           radius: SizeConstants.width(5.5),
           backgroundColor: ColorConstants.surface,
           child: CircleAvatar(
@@ -27,6 +32,7 @@ class Header extends StatelessWidget {
             backgroundImage: const AssetImage('assets/profile.jpg'),
             onBackgroundImageError: (_, __) {},
           ),
+        ),
         ),
       ],
     );
