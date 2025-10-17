@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                         return const SizedBox.shrink();
                       },
                     ),
-                    SizedBox(height: SizeConstants.height(2)),
+                    SizedBox(height: SizeConstants.height(20)),
                     Align(
                       alignment: Alignment.center,
                       child: ContinueButton(),

@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: ColorConstants.background,
       body: const Center(
         child: Text(
-          'noviindus',
+          'Noviindus',
           style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w700),
         ),
       ),
